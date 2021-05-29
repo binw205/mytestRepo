@@ -1,0 +1,134 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+  <nfv xmlns="urn:etsi:nfv:yang:etsi-nfv-descriptors">
+    <vnfd>
+      <id>altiostar_vDU</id>
+      <product-name>altiostar_vDU</product-name>
+      <provider>acne</provider>
+      <version>1.0</version>
+      <product-info-description>VNFD for Altiostar vDU, single VDU</product-info-description>
+      <product-info-name>Virtual Distributed Unit</product-info-name>
+      <software-version>1.0</software-version>
+      <vnfm-info>netconf</vnfm-info>
+      <vdu>
+        <id>vdu_node_1</id>
+        <name>somename</name>
+        <int-cpd>
+          <id>node_1_nic0</id>
+          <int-virtual-link-desc>ecp-vl</int-virtual-link-desc>
+          <layer-protocol>ipv4</layer-protocol>
+          <interface-id xmlns="http://cisco.com/ns/nso/cfp/cisco-etsi-nfvo">0</interface-id>
+          <management xmlns="http://cisco.com/ns/nso/cfp/cisco-etsi-nfvo"/>
+        </int-cpd>
+        <int-cpd>
+          <id>node_1_nic1</id>
+          <int-virtual-link-desc>front-haul</int-virtual-link-desc>
+          <layer-protocol>ipv4</layer-protocol>
+          <interface-id xmlns="http://cisco.com/ns/nso/cfp/cisco-etsi-nfvo">1</interface-id>
+          <additional-sol1-parameters xmlns="http://cisco.com/ns/nso/cfp/cisco-etsi-nfvo-sol1-extensions">
+            <ip-address-variable>NIC1_IP_ADDRESS</ip-address-variable>
+          </additional-sol1-parameters>
+        </int-cpd>
+        <int-cpd>
+          <id>node_1_nic2</id>
+          <int-virtual-link-desc>back-haul</int-virtual-link-desc>
+          <layer-protocol>ipv4</layer-protocol>
+          <interface-id xmlns="http://cisco.com/ns/nso/cfp/cisco-etsi-nfvo">2</interface-id>
+        </int-cpd>
+        <int-cpd>
+          <id>node_1_nic3</id>
+          <int-virtual-link-desc>altiostar-mgmt</int-virtual-link-desc>
+          <layer-protocol>ipv4</layer-protocol>
+          <interface-id xmlns="http://cisco.com/ns/nso/cfp/cisco-etsi-nfvo">3</interface-id>
+        </int-cpd>
+        <virtual-compute-desc>vDU_standard_flv</virtual-compute-desc>
+        <virtual-storage-desc>vDU4_vol</virtual-storage-desc>
+        <sw-image-desc>vBBU-2.0.352</sw-image-desc>
+      </vdu>
+      <sw-image-desc>
+        <id>vBBU-2.0.352</id>
+        <name>vDU-2.0-402</name>
+        <image-name-variable xmlns="http://cisco.com/ns/nso/cfp/cisco-etsi-nfvo-sol1-extensions">VDU_IMAGE_NAME</image-name-variable>
+        <version>1.0</version>
+        <checksum>
+          <algorithm>sha-256</algorithm>
+          <hash>9af30fce37a4c5c831e095745744d6d2</hash>
+        </checksum>
+        <container-format>bare</container-format>
+        <disk-format>qcow2</disk-format>
+        <min-disk>2</min-disk>
+        <size>2</size>
+        <image>http://engci-maven-master.cisco.com/artifactory/nso-snapshot/NFVO-SOL003-VNF-Images-0.0.3/Altiostar_VDU/vDU-2.0-402-27Dec2017.qcow2</image>
+      </sw-image-desc>
+      <virtual-compute-desc>
+        <id>vDU_standard_flv</id>
+        <flavour-name-variable xmlns="http://cisco.com/ns/nso/cfp/cisco-etsi-nfvo-sol1-extensions">VIM_FLAVOR</flavour-name-variable>
+        <virtual-memory>
+          <size>0.5</size>
+        </virtual-memory>
+        <virtual-cpu>
+          <num-virtual-cpu>1</num-virtual-cpu>
+        </virtual-cpu>
+      </virtual-compute-desc>
+      <virtual-storage-desc>
+        <id>vDU4_vol</id>
+        <type-of-storage>root-storage</type-of-storage>
+        <size-of-storage>15</size-of-storage>
+        <sw-image-desc>vBBU-2.0.352</sw-image-desc>
+      </virtual-storage-desc>
+      <int-virtual-link-desc>
+        <id>front-haul</id>
+        <description>Front Haul Network VL</description>
+        <connectivity-type>
+          <layer-protocol>ipv4</layer-protocol>
+        </connectivity-type>
+      </int-virtual-link-desc>
+      <int-virtual-link-desc>
+        <id>back-haul</id>
+        <description>Back Haul Network VL</description>
+        <connectivity-type>
+          <layer-protocol>ipv4</layer-protocol>
+        </connectivity-type>
+      </int-virtual-link-desc>
+      <int-virtual-link-desc>
+        <id>altiostar-mgmt</id>
+        <description>Altiostar Management Network VL</description>
+        <connectivity-type>
+          <layer-protocol>ipv4</layer-protocol>
+        </connectivity-type>
+      </int-virtual-link-desc>
+      <int-virtual-link-desc>
+        <id>ecp-vl</id>
+        <description>Some description</description>
+        <connectivity-type>
+          <layer-protocol>ipv4</layer-protocol>
+        </connectivity-type>
+      </int-virtual-link-desc>
+      <ext-cpd>
+        <id>anECP</id>
+        <layer-protocol>ipv4</layer-protocol>
+        <int-virtual-link-desc>ecp-vl</int-virtual-link-desc>
+      </ext-cpd>
+      <configurable-properties>
+        <additional-configurable-property>
+          <key>BOOTUP_TIME</key>
+        </additional-configurable-property>
+      </configurable-properties>
+      <df>
+        <id>default</id>
+        <vdu-profile>
+          <id>vdu_node_1</id>
+          <min-number-of-instances>1</min-number-of-instances>
+          <max-number-of-instances>1</max-number-of-instances>
+        </vdu-profile>
+        <instantiation-level>
+          <id>default</id>
+          <vdu-level>
+            <vdu-id>vdu_node_1</vdu-id>
+            <number-of-instances>1</number-of-instances>
+          </vdu-level>
+        </instantiation-level>
+        <default-instantiation-level>default</default-instantiation-level>
+      </df>
+    </vnfd>
+  </nfv>
+</config>

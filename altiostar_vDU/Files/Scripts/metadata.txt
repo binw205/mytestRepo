@@ -1,0 +1,37 @@
+#cloud-config
+  
+write_files:
+- path: /var/lib/cloud/data/interfaces
+  permissions:  '0644'
+  content: |
+        #eth0 - Mgmt configuration
+        auto eth0
+        iface eth0 inet dhcp
+        #eth1 - Fronthaul configuration
+        auto eth1
+        iface eth1 inet static
+          address $NICID_1_0_IP_ADDRESS
+          netmask $NICID_1_0_NETMASK
+          up ip route add $NICID_1_0_CIDR_ADDRESS/$NICID_1_0_CIDR_PREFIX via $NICID_1_0_GATEWAY dev eth1
+        #eth2 - Backhaul configuration
+        auto eth2
+        iface eth2 inet dhcp
+        #eth3 - Altiostar Management configuration
+        auto eth3
+        iface eth3 inet dhcp
+          up ip route add default dev eth3
+          hostname vDU4_vnfc
+- path: /mnt/prov.ini
+  permissions:  '0644'
+  content: |
+        ems-ipaddr: 10.72.125.105
+        ems-udpport: 1622
+        site-name: vDU4_vnfc
+  
+hostname:  vDU4_vnfc
+fqdn:  vDU4_vnfc.rma.lan
+   
+runcmd:
+- [ sh, -c, echo "=========Configuring Network=========" ]
+- [ sh, -xc, aninetparser ]
+- [ sh, -xc, service network restart ]

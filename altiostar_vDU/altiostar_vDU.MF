@@ -1,0 +1,9 @@
+metadata:
+vnfd_id: altiostar_vDU
+vnf_product_name: altiostar_vDU
+vnf_provider_id: acne
+vnf_software_version: 1.0
+vnf_package_version: 1.0
+vnf_release_date_time: 2017-01-01T10:00:00+03:00
+vnfm_info: netconf
+
